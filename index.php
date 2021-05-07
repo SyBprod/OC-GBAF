@@ -13,7 +13,7 @@
     <body>
         <header>
             <div class="img-solo">
-                <img src="images/logo-gbaf.png" alt="logo GBAF"  />
+                <img src="images/logo-gbaf.png" alt="logo GBAF" />
             </div>
         </header>
         <main>    
