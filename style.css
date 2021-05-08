@@ -294,24 +294,24 @@ footer a{
 .part-content{
   display: flex; 
   align-items:flex-start;
-  height:180px; 
+  height:auto; 
   background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
   border: 2px solid #e5e5e5;
 }
 .part-img-content{
   flex-shrink: 0;
-  flex-basis: 25%;
+  flex-basis: 30%;
   align-self: stretch;
   background-color: white;
-  padding: 20px;
+  padding: 20px 10px;
 }
 .part-img-content img{
-  max-width:220px;
+  max-width:200px;
   height:auto;
 }
 .part-text{
-  padding:20px;
+  padding:20px 10px 10px 20px;
 }
 .texte-court{flex-grow:1;}
 .part-text a{
@@ -385,21 +385,7 @@ footer a{
 }
 /*---------------------MEDIA QUERIES--------------------------------*/
 /*------------------------------------------------------------------*/
-/* -------------------Breakpoint 1024px----------------------------- */
-@media all and (max-device-width: 1024px){
-  .no-count{
-    margin-left:0px;
-  }
-}
-/* -------------------Breakpoint 910px----------------------------- */
-@media all and (max-device-width: 910px){
-  .wrapper{
-    padding: 60px 40px 40px 40px;
-  }
-  .part-img-content img {
-    max-width: 180px;
-  }
-}
+
 /* -------------------Breakpoint 768px----------------------------- */
 @media all and (max-device-width: 768px){
   body{
@@ -438,7 +424,7 @@ footer a{
   }
   .wrapper{
     width: 100%;
-    padding: 60px 30px 30px 30px;
+    padding: 60px 40px 30px 40px;
     align-self: center;
   }
   .part-text{
