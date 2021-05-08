@@ -1,31 +1,9 @@
-/*--------------GLOBAL---------------*/
-/*-----------------------------------*/
+/*------------------GLOBAL---------------*/
+/*---------------------------------------*/
 *{
   box-sizing: border-box;
   margin:0;
   padding: 0;
-}
-/*--------------Marges---------------*/
-.pt-10{
-  padding-top: 10px;
-}
-.pt-20{
-  padding-top: 20px;
-}
-.pb-10{
-  padding-bottom: 10px;
-}
-.pb-20{
-  padding-bottom: 20px;
-}
-.mt-20{
-  margin-top:20px;
-}
-.mb-20{
-  margin-bottom:20px;
-}
-.mb-30{
-  margin-bottom:30px;
 }
 /*--------------Typographie---------------*/
 h1{
@@ -88,6 +66,28 @@ a.link:hover{
 /*--------------Liste---------------*/
 ul li{
   margin-left:5%;
+}
+/*--------------Marges---------------*/
+.pt-10{
+  padding-top: 10px;
+}
+.pt-20{
+  padding-top: 20px;
+}
+.pb-10{
+  padding-bottom: 10px;
+}
+.pb-20{
+  padding-bottom: 20px;
+}
+.mt-20{
+  margin-top:20px;
+}
+.mb-20{
+  margin-bottom:20px;
+}
+.mb-30{
+  margin-bottom:30px;
 }
 /*----------------------ELEMENTS----------------------*/
 /*----------------------------------------------------*/
@@ -209,7 +209,7 @@ form a:hover{
 }
 /*---------------STRUCTURE---------------*/
 /*---------------------------------------*/
-/*---------------Body---------------*/
+/*-------------------Body----------------*/
 body{
   background-image: linear-gradient(to left,white 50%,#f00 50%);
   min-height:100vh;
@@ -229,15 +229,27 @@ header nav{
   align-items: center;
   flex-grow: 1;
   justify-content: end;
-  padding-right: 10%;
+  padding-right: 4%;
+}
+.nav-ic{
+  margin-left:10px;
+}
+.nav-ic a:last-of-type{
+  padding: 0 20px;
 }
 nav p{
   color: #ffffff;
   font-weight: bold;
+  padding-right: 10px;;
 }
+.nav-p p{
+  display: inline;
+  font-size: 15px;
+}
+
 nav i.fas{
   color:#ffffff;
-  font-size:32px;
+  font-size:30px;
 }
 nav i.fas:hover{
   transition: color 0.3s ease-in-out ;
@@ -266,7 +278,7 @@ main{
   padding: 60px 100px;
   width:1024px;
 }
-/*---------FOOTER-------------------*/
+/*----------------------FOOTER------------------------*/
 footer{
   display: inline-flex;
   justify-content: center;
@@ -285,7 +297,8 @@ footer a{
   color: whitesmoke;
 }
 /*-----------------------PAGES-----------------------*/
-/*--------------------Page Accueil------------------*/
+/*---------------------------------------------------*/
+/*--------------------Page Accueil-------------------*/
 .liste-part{
   outline-offset: 10px;
   outline: 1px rgb(199, 199, 199) solid;
@@ -396,56 +409,20 @@ footer a{
     line-height: 1.3;
   }
   header{
-    background-image: linear-gradient(to bottom,white 50%,#f00 50%);
-  }
-  .img-solo{
-    padding-left: 0px;
-    margin:auto;
-    padding: 0px 10px 0 10px;
-    background-color: #fff;
-  }
-  .img-plus{
-    background-color: white;
-    padding: 0 5px 0 5px;
-    margin-left: 20px;
+    background-image: linear-gradient(to bottom,white 35%,#f00 10%);
   }
   header nav{
     align-items: end;
     justify-content: end;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
     padding-right: 0px;
     }
-  .no-wrap{
-    display: block;
+  .nav-p{
+    margin-bottom:7px;
   }
   main{
     flex-direction:column;
     justify-content: flex-start; 
-  }
-  .wrapper{
-    width: 100%;
-    padding: 60px 40px 30px 40px;
-    align-self: center;
-  }
-  .part-text{
-    padding: 16px;
-  }
-  .part-text a {
-    margin: 10px 0 0 0;
-  }
-  .card-simple, .card-double{
-    margin-top:30px;
-    margin-bottom:10px;
-    padding: 30px 30px 20px 30px;
-    align-self: center;
-  }
-  .no-count,.no-password{
-    align-self: center;
-    margin: 10px 0 30px 0;
-  }
-  img#illustr{
-    width:100%;
-    height: auto;
   }
   footer{
     flex-direction:column-reverse;
@@ -464,6 +441,41 @@ footer a{
     padding-top: 20px;
     padding-right: 0;
     font-size: 14px;
+  }
+  .wrapper{
+    width: 100%;
+    padding: 60px 40px 30px 40px;
+    align-self: center;
+  }
+  .img-solo{
+    padding-left: 0px;
+    margin:auto;
+    padding: 0px 10px 0 10px;
+    background-color: #fff;
+  }
+  .img-plus{
+    background-color: white;
+    padding: 0 5px 0 5px;
+    margin-left: 20px;
+  }
+  .no-wrap{
+    display: block;
+  }
+  .part-text{
+    padding: 16px;
+  }
+  .part-text a {
+    margin: 10px 0 0 0;
+  }
+  .card-simple, .card-double{
+    margin-top:30px;
+    margin-bottom:10px;
+    padding: 30px 30px 20px 30px;
+    align-self: center;
+  }
+  .no-count,.no-password{
+    align-self: center;
+    margin: 10px 0 30px 0;
   }
 }
 /* -------------------Breakpoint 600px----------------------------- */
@@ -516,13 +528,18 @@ footer a{
   header nav{
     display: flex;
     padding: 20px 0 20px 0;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .nav-p{
+    margin-bottom: 15px;
+    padding: 5px;
   }
   .img-plus, .img-solo{
     margin: auto;
   }
   h1{
-    font-size: 38px;
+    font-size: 36px;
     line-height: 1.3;
   }
   h2{
