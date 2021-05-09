@@ -19,7 +19,7 @@
         <main id="connexion">    
             <section class="card-double">
                 <h1>Inscription</h1>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <form method="POST" action="inscription_post.php">
                         <p>Entrez vos informations personnelles</p>
                             <div class="input-left"> 
                                 <label for="nom">Nom</label>
@@ -40,10 +40,10 @@
                             <div class="input-center"> 
                                 <label for="question">Question secrète</label>
                                 <select id="question" name="question">
-                                    <option value="Nom de jeune fille de votre mère">Nom de jeune fille de votre mère</option>
-                                    <option value="Nom de votre premier animal de compagnie">Nom de votre premier animal de compagnie</option>
-                                    <option value="Nom de votre école primaire">Nom de votre école primaire</option>
-                                    <option value="Prénom de votre cousin ou cousine aîné.e">Prénom de votre cousin ou cousine aîné.e</option>
+                                    <option value="<?php $_POST['Nom de jeune fille de votre mère']; ?>">Nom de jeune fille de votre mère</option>
+                                    <option value="<?php $_POST['Nom de votre premier animal de compagnie']; ?>">Nom de votre premier animal de compagnie</option>
+                                    <option value="<?php $_POST['Nom de votre école primaire']; ?>">Nom de votre école primaire</option>
+                                    <option value="<?php $_POST['Prénom de votre cousin ou cousine aîné.e']; ?>">Prénom de votre cousin ou cousine aîné.e</option>
                                 </select>
                             </div>
                             <div class="input-center"> 
