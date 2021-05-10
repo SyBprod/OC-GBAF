@@ -26,16 +26,34 @@
                 Pour remédier à cela,  <strong>le GBAF souhaite proposer aux salariés des grands groupes français un point d’entrée unique</strong>, répertoriant un grand nombre d’informations sur les partenaires et acteurs du groupe ainsi que sur les produits et services bancaires et financiers. <br /><strong>Chaque salarié</strong> pourra ainsi poster un commentaire et donner son avis. 
                 </p>
                 <div class="liste-part">
-                    <div class="part-content mt-20">
+                    
+<?php //Connexion à la bdd
+	try{
+		$bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '');
+	}
+	catch(Exception $e)
+	{
+		die('Erreur : ' .$e->getMessage());
+	}
+	$reponse = $bdd->query('SELECT acteur, SUBSTRING(description, 1, 100) AS extrait, logo FROM acteur ');//Récupération des infos de la table acteur
+		while($donnees = $reponse->fetch())
+			{
+	
+		?>          <div class="part-content mt-20">
                         <div class="part-img-content">
-                            <img src="images/formation_co.png" alt="logo FORMATION & CO" />
+                          <?php  echo '<img src="data:image/png;base64,' . base64_encode($donnees['logo']) . '" />';?>
                         </div>
-                        <div class="part-text">
-                            <h3>FORMATION & co</h3>
-                            <p>Formation&co est une association française présente sur tout le territoire.</p>
-                            <a class="button" href="formation-and-co.php" target="_blank">Lire la suite</a>
+						<div class="part-text">
+                            <h3><?php echo $donnees['acteur']; ?></h3>
+                            <p><?php echo $donnees['extrait']; ?> ...</p> 
+							<a class="button" href="#" target="_blank">Lire la suite</a>
                         </div>
                     </div>
+	<?php
+}
+$reponse->closeCursor();
+?>
+                    
                 </div>
             </section>
         </main>
