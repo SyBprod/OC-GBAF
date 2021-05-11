@@ -1,5 +1,5 @@
 <?php 
-//Création d'une superglobale de démarrage de session
+//Création d'un démarrage de session
     session_start();
 ?>
 <!DOCTYPE html>
@@ -15,9 +15,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Nunito:wght@700;800&display=swap" rel="stylesheet"> 
     </head>
     <body>
-        <?php include('header.php'); ?>
+        <?php include('header.php'); ?><!--Inclusion d'un header spécifique avec identification du visiteur-->
         <main>   
             <section class="wrapper">
+                <!--Présentation du GBAF-->
                 <h1 class="pb-20">GBAF</h1>
 		        <p class="pb-20">Représentant de la profession bancaire et des assureurs, le <strong>Groupement Banque Assurance Français</strong> (GBAF) est une fédération représentant de grands groupes français qui vont travailler de la même façon pour gérer près de <strong>80 millions de comptes</strong> sur le territoire national.<br /> Sa mission est de <strong>promouvoir l'activité bancaire à l’échelle nationale</strong>. C’est aussi un <strong>interlocuteur privilégié</strong> des pouvoirs publics. 
                 </p>
@@ -29,34 +30,40 @@
                 Aujourd’hui, il n’existe pas de base de données pour chercher ces informations de manière fiable et rapide ou pour donner son avis sur les partenaires et acteurs du secteur bancaire, tels que les associations ou les financeurs solidaires. 
                 Pour remédier à cela,  <strong>le GBAF souhaite proposer aux salariés des grands groupes français un point d’entrée unique</strong>, répertoriant un grand nombre d’informations sur les partenaires et acteurs du groupe ainsi que sur les produits et services bancaires et financiers. <br /><strong>Chaque salarié</strong> pourra ainsi poster un commentaire et donner son avis. 
                 </p>
+                <!--Présentation de chaque partenaire-->
                 <div class="liste-part">
                     
-<?php //Connexion à la bdd
-	try{
-		$bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '');
-	}
-	catch(Exception $e)
-	{
-		die('Erreur : ' .$e->getMessage());
-	}
-	$reponse = $bdd->query('SELECT acteur, SUBSTRING(description, 1, 98) AS extrait, logo FROM acteur ');
-    //Récupération des infos de la table acteur
-		while($donnees = $reponse->fetch())
-			{
-	?>          <div class="part-content mt-20">
+                <?php //Connexion à la bdd
+                    try{
+                        $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '');
+                    }
+                    catch(Exception $e)
+                    {
+                        die('Erreur : ' .$e->getMessage());
+                    }
+                    $reponse = $bdd->query('SELECT acteur, SUBSTRING(description, 1, 98) AS extrait, logo FROM acteur ');
+                    //Récupération des infos de la table acteur
+                        while($donnees = $reponse->fetch())
+                            {
+                    ?>  
+                    <!-- Block de présentation individuelle des partenaires à partir des infos récupérées  -->        
+                    <div class="part-content mt-20">
+                        <!-- Logo -->
                         <div class="part-img-content">
-                          <?php  echo '<img src="data:image/png;base64,' . base64_encode($donnees['logo']) . '" />';?>
+                            <?php  echo '<img src="data:image/png;base64,' . base64_encode($donnees['logo']) . '" />';?>
                         </div>
+                        <!-- Titre et texte -->
 						<div class="part-text">
                             <h3><?php echo $donnees['acteur']; ?></h3>
                             <p><?php echo $donnees['extrait']; ?> ...</p> 
+                            <!-- Bouton qui ouvre sur la page partenaire correspondante-->
 							<a class="button" href="#" target="_blank">Lire la suite</a>
                         </div>
                     </div>
-	<?php
-            }
-            $reponse->closeCursor();
-    ?>
+                    <?php
+                            }
+                            $reponse->closeCursor();
+                    ?>
                 </div>
             </section>
         </main>
