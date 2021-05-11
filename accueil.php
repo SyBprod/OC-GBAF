@@ -1,3 +1,7 @@
+<?php 
+//Création d'une superglobale de démarrage de session
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -35,11 +39,11 @@
 	{
 		die('Erreur : ' .$e->getMessage());
 	}
-	$reponse = $bdd->query('SELECT acteur, SUBSTRING(description, 1, 100) AS extrait, logo FROM acteur ');//Récupération des infos de la table acteur
+	$reponse = $bdd->query('SELECT acteur, SUBSTRING(description, 1, 98) AS extrait, logo FROM acteur ');
+    //Récupération des infos de la table acteur
 		while($donnees = $reponse->fetch())
 			{
-	
-		?>          <div class="part-content mt-20">
+	?>          <div class="part-content mt-20">
                         <div class="part-img-content">
                           <?php  echo '<img src="data:image/png;base64,' . base64_encode($donnees['logo']) . '" />';?>
                         </div>
@@ -50,10 +54,9 @@
                         </div>
                     </div>
 	<?php
-}
-$reponse->closeCursor();
-?>
-                    
+            }
+            $reponse->closeCursor();
+    ?>
                 </div>
             </section>
         </main>

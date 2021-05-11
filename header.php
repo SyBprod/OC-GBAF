@@ -4,8 +4,8 @@
         </div>
         <nav>
             <div class="nav-p">
-                <p>Nom</p>
-                <p>Prénom</p>
+                <p><?php $_SESSION['Nom']; ?></p>
+                <p><?php $_SESSION['Prénom']; ?></p>
             </div>
             <div class="nav-ic"> 
                 <a href="index.php" title="Se déconnecter" alt="déconnexion" ><i class="fas fa-sign-out-alt"></i></a>
