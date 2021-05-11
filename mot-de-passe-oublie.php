@@ -16,35 +16,38 @@
                 <img src="images/logo-gbaf.png" alt="logo GBAF" />
             </div>
         </header>
-        <main>    
+        <main>  
+            <!-- Formulaire de récupération du mot de passe à partir du username, de la question et de la réponse -->  
             <section class="card-double">
-                 <h1>Mot de passe oublié</h1>
-		            <form action="#">
-			            <p>Pour récupérer votre mot de passe <br/>veuillez répondre à la question secrète</p>
-                        <div class="input-center">
-                            <label for="username">Username</label>
-                            <input type="text" placeholder="Username" id="username" name="username" value="Username" autofocus /> 
-                            <label for="question">Question secrète</label>
-                            <select id="question" name="question">
-                                <option value="Nom de jeune fille de votre mère">Nom de jeune fille de votre mère</option>
-                                <option value="Nom de votre premier animal de compagnie">Nom de votre premier animal de compagnie</option>
-                                <option value="Nom de votre école primaire">Nom de votre école primaire</option>
-                                <option value="Prénom de votre cousin ou cousine aîné.e">Prénom de votre cousin ou cousine aîné.e</option>
-                            </select>
-                        </div>
-                        <div class="input-center"> 
-                            <label for="reponse">Réponse à la question secrète</label>
-                            <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="" />
-                        </div>
-                        <input class="submit-button" type="submit" role="button" value="Valider">
-                        <p class="pt-20 pb-20">J'ai définitivement oublié le mot de passe<span class="no-wrap"> <i class="fas fa-caret-right"></i><a class="pt-20" href="#">  Contacter le webmaster</a></span></p>
-		            </form>
+                <h1>Mot de passe oublié</h1>
+		        <form action="#" method="post">
+			        <p>Pour récupérer votre mot de passe <br/>veuillez vous identifier et répondre à la question secrète choisie</p>
+                    <div class="input-center">
+                        <label for="username">Username</label>
+                        <input type="text" placeholder="Username" id="username" name="username" value="<?php if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']);  ?>" autofocus /> 
+                        <label for="question">Question secrète</label>
+                        <select id="question" name="question">
+                            <option value="Nom de jeune fille de votre mère">Nom de jeune fille de votre mère</option>
+                            <option value="Nom de votre premier animal de compagnie">Nom de votre premier animal de compagnie</option>
+                            <option value="Nom de votre école primaire">Nom de votre école primaire</option>
+                            <option value="Prénom de votre cousin ou cousine aîné.e">Prénom de votre cousin ou cousine aîné.e</option>
+                        </select>
+                    </div>
+                    <div class="input-center"> 
+                        <label for="reponse">Réponse à la question secrète</label>
+                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="" />
+                    </div>
+                    <!-- Bouton de validation affiche soit un message d'erreur soit la réponse-->
+                    <input class="submit-button" type="submit" role="button" value="Valider">
+                    <p class="pt-20 pb-20">J'ai définitivement oublié le mot de passe<span class="no-wrap"> <i class="fas fa-caret-right"></i><a class="pt-20" href="#">  Contacter le webmaster</a></span></p>
+		        </form>
             </section>
             <section class="no-password">
-                    <p id="echo-erreur" class="pb-20">La réponse est éronnée, veuillez recommencer</p><br /><!-- echo $erreur;  -->
-                    <p class="pb-20">Votre mot de passe est :</p>
-                    <p id="echo-info" class="pb-20">Nestor</p><!--  echo $info;  -->
-                    <a class="button" href="index.php">Retour page connexion</a>
+                <p id="echo-erreur" class="pb-20">La réponse est éronnée, veuillez recommencer</p><br /><!-- echo $erreur;  -->
+                <p class="pb-20">Votre mot de passe est :</p>
+                <p id="echo-info" class="pb-20">Nestor</p><!--  echo $info;  -->
+                <!-- Bouton de retour à la page de connexion -->
+                <a class="button" href="index.php">Retour page connexion</a>
             </section>
         </main>
         <?php include('footer.php'); ?>
