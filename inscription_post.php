@@ -25,7 +25,8 @@ try{
 	}
 
 	//Hachage du mot de passe
-    //$pass_hashe = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+	
+    //$pass_hashe = password_hash($_POST['pass'], PASSWORD_DEFAULT); 
 
 	 //Insertion dans la table account
 	 $req = $bdd->prepare('INSERT INTO account(nom, prenom, username, pass, question, reponse) VALUES(:nom, :prenom, :username, :pass, :question, :reponse)');
@@ -37,6 +38,6 @@ try{
          'question' => $_POST['question'],
          'reponse' => $_POST['reponse']));
 	
-//Puis redirection vers index.php
+//Puis redirection vers index.php pour la connexion
 header('Location: index.php');
  ?>

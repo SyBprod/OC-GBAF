@@ -23,9 +23,9 @@
 		        <form action="connexion_post.php" method="POST">
 			        <p>Entrez vos identifiants de connexion</p>
                     <label for="username">Username</label>
-                    <input type="text" placeholder="Username" id="username" name="username" value="<?php if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']);  ?>" autofocus />
-                    <label for="password">Password</label>
-                    <input type="password" placeholder="Password" id="password" name="pass" value="<?php if(isset($_POST['pass'])) echo htmlspecialchars($_POST['pass']);  ?>" />
+                    <input type="text" placeholder="Username" id="username" name="username" value="<?php if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']);  ?>" required autofocus />
+                    <label for="password" >Password</label>
+                    <input type="password" placeholder="Password" id="password" name="pass" value="<?php if(isset($_POST['pass'])) echo htmlspecialchars($_POST['pass']);  ?>" required />
                     <input class="submit-button" type="submit" role="button">
                     <!-- Lien qui dirige vers une page de récupération du mot de passe en cas de d'oubli -->
                     <a class="pt-20" href="mot-de-passe-oublie.php">Mot de passe oublié ?</a>
