@@ -1,3 +1,7 @@
+<?php 
+//Démarrage de session qui va être appliquée sur les pages faisant appel à ce header
+    session_start();
+?>
 <header>
         <div class="img-plus">
             <img src="images/logo-gbaf.png" alt="logo gbaf" />
