@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -13,14 +16,14 @@
     <body>
         <header>
             <div class="img-solo">
-                <img src="images/logo-gbaf.png" alt="logo GBAF" />
+            <a href="index.php"><img src="images/logo-gbaf.png" alt="logo GBAF" /></a>
             </div>
         </header>
         <main>  
             <!-- Formulaire de récupération du mot de passe à partir du username, de la question et de la réponse -->  
             <section class="card-double">
                 <h1>Mot de passe oublié</h1>
-		        <form action="#" method="post">
+		        <form action="pass_post.php" method="post">
 			        <p>Pour récupérer votre mot de passe <br/>veuillez vous identifier et répondre à la question secrète choisie</p>
                     <div class="input-center">
                         <label for="username">Username</label>
@@ -35,17 +38,19 @@
                     </div>
                     <div class="input-center"> 
                         <label for="reponse">Réponse à la question secrète</label>
-                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="" />
+                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="<?php if(isset($_POST['reponse'])) echo htmlspecialchars($_POST['reponse']); ?>" />
                     </div>
                     <!-- Bouton de validation affiche soit un message d'erreur soit la réponse-->
                     <input class="submit-button" type="submit" role="button" value="Valider">
-                    <p class="pt-20 pb-20">J'ai définitivement oublié le mot de passe<span class="no-wrap"> <i class="fas fa-caret-right"></i><a class="pt-20" href="#">  Contacter le webmaster</a></span></p>
+                    <p class="pt-20 pb-20">J'ai définitivement oublié mes identifiants<span class="no-wrap"> <i class="fas fa-caret-right"></i><a class="pt-20" href="#">  Contacter le webmaster</a></span></p>
 		        </form>
             </section>
             <section class="no-password">
-                <p id="echo-erreur" class="pb-20">La réponse est éronnée, veuillez recommencer</p><br /><!-- echo $erreur;  -->
-                <p class="pb-20">Votre mot de passe est :</p>
-                <p id="echo-info" class="pb-20">Nestor</p><!--  echo $info;  -->
+               <!--  <p id="echo-erreur" class="pb-20">La réponse est éronnée, veuillez recommencer</p><br /> -->
+                <!-- AFfichage d'un message d'erreur en cas d'identifiants erronés -->
+                <p id="echo-erreur" class="pb-20"><?php if(isset($_SESSION['erreur'])) echo $_SESSION['erreur']; unset($_SESSION['erreur']); ?></p><!-- echo $erreur;  -->
+                <p class="pb-20">Votre mot de passe est :</p><br />
+                <p id="echo-info" class="pb-20"><?php if(isset($_SESSION['pass'])) echo htmlspecialchars($_SESSION['pass']); unset($_SESSION['pass']); ?></p><!--  echo $info;  -->
                 <!-- Bouton de retour à la page de connexion -->
                 <a class="button" href="index.php">Retour page connexion</a>
             </section>

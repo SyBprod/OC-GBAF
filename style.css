@@ -28,6 +28,14 @@ p, a, label, ul, li{
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
+p#echo-erreur {
+  color:#ff0000;
+  font-weight: bold;
+}
+p#echo-info {
+  color:rgb(56, 168, 84);
+  font-weight: bold;
+}
 /*---------------Links---------------*/
 a{
   text-decoration: none;
