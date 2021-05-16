@@ -8,7 +8,7 @@
         </div>
         <nav>
             <div class="nav-p">
-                <p><?php echo $_SESSION['prenom'].' '.$_SESSION['nom']; ?></p>
+                <p><?php $_SESSION['id_user']; echo $_SESSION['prenom'].' '.$_SESSION['nom']; ?></p>
             </div>
             <div class="nav-ic"> 
                 <a href="deconnexion.php" title="Se déconnecter" alt="déconnexion" ><i class="fas fa-sign-out-alt"></i></a>
