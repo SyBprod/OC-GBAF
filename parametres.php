@@ -1,7 +1,3 @@
-<?php 
-//Création d'un démarrage de session
-   // session_start();
-?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -32,7 +28,7 @@
                         }
                         //On teste l'existence de la variable de session id_user
                     if(isset($_SESSION['id_user']))
-                    {
+                    {   
                         $id_user = $_SESSION['id_user'];
                         $info = '';
                     
@@ -54,41 +50,40 @@
                     <p>Pour modifier un ou plusieurs paramètres de votre compte, saisissez les nouvelles valeurs et valider. Vous serez redirigé vers la page connexion.</p>
                     <div class="input-left"> 
                         <label for="nom">Nom</label>
-                        <input type="text" placeholder="Nom" id="nom" name="nom" value="<?php echo htmlspecialchars($donnees['nom']); ?>" autofocus />
+                        <input type="text" placeholder="Nom" id="nom" name="nom" value="<?php echo htmlspecialchars($donnees['nom']); if(isset($_POST['nom'])) echo htmlspecialchars($_POST['nom']); ?>" autofocus />
                     </div>
                     <div class="input-right"> 
                         <label for="prenom">Prénom</label>
-                        <input type="text" placeholder="Prénom" id="prenom" name="prenom" value="<?php echo htmlspecialchars($donnees['prenom']); ?>" />
+                        <input type="text" placeholder="Prénom" id="prenom" name="prenom" value="<?php echo htmlspecialchars($donnees['prenom']); if(isset($_POST['prenom'])) echo htmlspecialchars($_POST['prenom']); ?>" />
                     </div>
                     <div class="input-left"> 
                         <label for="username">Username</label>
-                        <input type="text" placeholder="Username" id="username" name="username" value="<?php echo htmlspecialchars($donnees['username']); ?>" />
+                        <input type="text" placeholder="Username" id="username" name="username" value="<?php echo htmlspecialchars($donnees['username']); if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']); ?>" />
                     </div>
                     <div class="input-right"> 
                         <label for="password">Password</label>
-                        <input type="password" placeholder="Password" id="pass" name="pass" value="<?php echo htmlspecialchars($donnees['pass']); ?>" />
+                        <input type="password" placeholder="Password" id="pass" name="pass" value="<?php echo htmlspecialchars($donnees['pass']); if(isset($_POST['pass'])) echo htmlspecialchars($_POST['pass']); ?>" />
                     </div>
                     <div class="input-center"> 
                         <label for="question">Question secrète</label>
                         <select id="question" name="question" >
-                            <option value="Nom de jeune fille de votre mère"><?php echo $donnees['question']; ?></option>
-                            <option value="Nom de votre premier animal de compagnie"><?php echo $donnees['question']; ?></option>
-                            <option value="Nom de votre école primaire"><?php $donnees['question']; ?></option>
-                            <option value="Prénom de votre cousin ou cousine aîné.e"><?php echo $donnees['question']; ?></option>
+                            <option class="affichage-question" value=""><?php echo $donnees['question']; ?></option><!--Affichage de la question choisie lors de l'inscription-->
+                            <option value="Nom de jeune fille de votre mère">Nom de jeune fille de votre mère</option>
+                            <option value="Nom de votre premier animal de compagnie">Nom de votre premier animal de compagnie</option>
+                            <option value="Nom de votre école primaire">Nom de votre école primaire</option>
+                            <option value="Prénom de votre cousin ou cousine aîné.e">Prénom de votre cousin ou cousine aîné.e</option>
                         </select>
                     </div>
                     <div class="input-center"> 
                         <label for="reponse">Réponse à la question secrète</label>
-                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="<?php echo htmlspecialchars($donnees['reponse']); ?>" />
+                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="<?php echo htmlspecialchars($donnees['reponse']); if(isset($_POST['reponse'])) echo htmlspecialchars($_POST['reponse']);?>" />
                     </div>
                     <!-- AFfichage d'un message d'erreur en cas d'erreur -->
                     <p><?php echo $info; ?></p>
                     <!-- La validation ramène à la page de connexion -->
                     <input class="submit-button" type="submit" role="button" value="Valider">
                 </form>
-                
-                
-            </section>
+             </section>
         </main>
         <?php include('footer.php'); ?>
     </body>

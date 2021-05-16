@@ -165,6 +165,10 @@ form a:hover{
   border-bottom:1px solid #456b64;
   transition: all .3s ease-out;
 }
+ select#question > option.affichage-question {
+  background-color: #ff0000 !important;
+  color:#ffffff !important;
+}
 /*--------------------Largeur form 450px ----------------*/
 .card-simple{
   background-color: #fff;

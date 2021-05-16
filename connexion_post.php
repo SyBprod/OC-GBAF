@@ -20,17 +20,16 @@
 		$req->execute(array(
 			'username' => $username));
 		$resultat = $req->fetch();
-		//var_dump($resultat['pass']);
-		 if ((!$resultat) OR $_POST['pass'] !== $resultat['pass'])
+		
+		if ((!$resultat) OR $_POST['pass'] !== $resultat['pass'])//On teste si les résultats concordent
 		{
-            session_start();
+            session_start(); //Si mauvais identifiants ouverture d'une session avec insertion d'un message d'erreur sur la page index.php
             $_SESSION['info'] = $info;
             header('Location: index.php');
-            //var_dump($_SESSION);
         }
             else
 		        {
-                    session_start();
+                    session_start(); // Si les identifiants correspondent à ceux de la bdd on charge les variables que l'on va afficher dans le header
                     $_SESSION['id_user'] = $resultat['id_user'];
                     $_SESSION['nom'] = $resultat['nomMaj'];
                     $_SESSION['prenom'] = $resultat['prenom'];

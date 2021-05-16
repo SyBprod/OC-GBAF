@@ -31,7 +31,7 @@
                     <input type="password" placeholder="Password" id="password" name="pass" value="<?php if(isset($_POST['pass'])) echo htmlspecialchars($_POST['pass']);  ?>" required />
                     <input class="submit-button" type="submit" role="button">
                     <!-- AFfichage d'un message d'erreur en cas d'identifiants erronés -->
-                    <p><?php if(isset($_SESSION['info'])) echo $_SESSION['info']; unset($_SESSION['info']) ?></p>
+                    <p><?php if(isset($_SESSION['info'])) echo $_SESSION['info']; unset($_SESSION['info']); ?></p>
                     <!-- Lien qui dirige vers une page de récupération du mot de passe en cas de d'oubli -->
                     <a class="pt-20" href="mot-de-passe-oublie.php">Mot de passe oublié ?</a>
 		        </form>
