@@ -1,6 +1,6 @@
 <?php 
 //Création d'un démarrage de session
-    session_start();
+   // session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,60 +15,79 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Nunito:wght@700;800&display=swap" rel="stylesheet"> 
     </head>
     <body>
-        <!--Inclusion d'un header spécifique avec identification du visiteur-->
+        <!--Inclusion d'un header spécifique avec identification du visiteur et démarrage de session-->
         <?php include('header.php'); ?>
         <main>  
             <section class="card-double">
                 <h1>Paramètres</h1>
-                <?php //Récupération des informations depuis la table account
-                //Connexion à la base de données
-                try{
-                    $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '');
-                    }
-                    catch(Exception $e)
+                <?php 
+                    //Récupération des informations depuis la table account
+                    try{  //Connexion à la base de données
+                        $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '', 
+                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                        }
+                        catch(Exception $e)
+                        {
+                            die('Erreur : ' .$e->getMessage());
+                        }
+                        //On teste l'existence de la variable de session id_user
+                    if(isset($_SESSION['id_user']))
                     {
-                        die('Erreur : ' .$e->getMessage());
-                    }
-                    //Récupération du compte
-                    $req = $bdd->prepare('SELECT id, nom, prenom, username, pass, question, reponse FROM account WHERE id =?');
-                    $req->execute(array($_GET['id']));//Revoir le code ci-à-côté
-                    $donnees = $req->fetch();
-                ?>
+                        $id_user = $_SESSION['id_user'];
+                        $info = '';
+                    
+                        //Récupération du compte
+                        $req = $bdd->prepare('SELECT nom, prenom, username, pass, question, reponse FROM account WHERE id_user = :id_user');
+                        $req->execute(array(
+                            'id_user' => $id_user
+                        ));
+                        $donnees = $req->fetch();
+                    }  
+                        else
+                        {
+                            echo 'Une erreur s\'est produite!';
+                        }
+		        $req->closeCursor();
+	            ?>
                 <!-- Formulaire de modification des paramètres du compte enregistrés après une connexion validée --> 
-                <form action="#" method="POST">
+                <form action="parametres_post.php" method="POST">
                     <p>Pour modifier un ou plusieurs paramètres de votre compte, saisissez les nouvelles valeurs et valider. Vous serez redirigé vers la page connexion.</p>
                     <div class="input-left"> 
                         <label for="nom">Nom</label>
-                        <input type="text" placeholder="Nom" id="nom" name="nom" value="<?php echo $donnees['nom']; ?>" autofocus />
+                        <input type="text" placeholder="Nom" id="nom" name="nom" value="<?php echo htmlspecialchars($donnees['nom']); ?>" autofocus />
                     </div>
                     <div class="input-right"> 
                         <label for="prenom">Prénom</label>
-                        <input type="text" placeholder="Prénom" id="prenom" name="prenom" value="<?php echo $donnees['prenom']; ?>" />
+                        <input type="text" placeholder="Prénom" id="prenom" name="prenom" value="<?php echo htmlspecialchars($donnees['prenom']); ?>" />
                     </div>
                     <div class="input-left"> 
                         <label for="username">Username</label>
-                        <input type="text" placeholder="Username" id="username" name="username" value="<?php echo $donnees['username']; ?>" />
+                        <input type="text" placeholder="Username" id="username" name="username" value="<?php echo htmlspecialchars($donnees['username']); ?>" />
                     </div>
                     <div class="input-right"> 
                         <label for="password">Password</label>
-                        <input type="password" placeholder="Password" id="pass" name="pass" value="<?php echo $donnees['pass']; ?>" />
+                        <input type="password" placeholder="Password" id="pass" name="pass" value="<?php echo htmlspecialchars($donnees['pass']); ?>" />
                     </div>
                     <div class="input-center"> 
                         <label for="question">Question secrète</label>
-                        <select id="question" name="question">
-                            <option value="<?php echo $donnees['question']; ?>">Nom de jeune fille de votre mère</option>
-                            <option value="<?php echo $donnees['question']; ?>">Nom de votre premier animal de compagnie</option>
-                            <option value="<?php echo $donnees['question']; ?>">Nom de votre école primaire</option>
-                            <option value="<?php echo $donnees['question']; ?>">Prénom de votre cousin ou cousine aîné.e</option>
+                        <select id="question" name="question" >
+                            <option value="Nom de jeune fille de votre mère"><?php echo $donnees['question']; ?></option>
+                            <option value="Nom de votre premier animal de compagnie"><?php echo $donnees['question']; ?></option>
+                            <option value="Nom de votre école primaire"><?php $donnees['question']; ?></option>
+                            <option value="Prénom de votre cousin ou cousine aîné.e"><?php echo $donnees['question']; ?></option>
                         </select>
                     </div>
                     <div class="input-center"> 
                         <label for="reponse">Réponse à la question secrète</label>
-                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="<?php echo $donnees['reponse']; ?>" />
+                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="<?php echo htmlspecialchars($donnees['reponse']); ?>" />
                     </div>
+                    <!-- AFfichage d'un message d'erreur en cas d'erreur -->
+                    <p><?php echo $info; ?></p>
                     <!-- La validation ramène à la page de connexion -->
                     <input class="submit-button" type="submit" role="button" value="Valider">
                 </form>
+                
+                
             </section>
         </main>
         <?php include('footer.php'); ?>
