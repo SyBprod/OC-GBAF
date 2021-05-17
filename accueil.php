@@ -31,15 +31,17 @@
                     
                 <?php //Connexion à la bdd
                     try{
-                        $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '');
-                    }
-                    catch(Exception $e)
-                    {
-                        die('Erreur : ' .$e->getMessage());
-                    }
-                    $reponse = $bdd->query('SELECT acteur, SUBSTRING(description, 1, 98) AS extrait, logo FROM acteur ');
+                        $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '', 
+                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                        }
+                        catch(Exception $e)
+                        {
+                            die('Erreur : ' .$e->getMessage());
+                        }
+                    $req = $bdd->query('SELECT id_acteur, acteur, SUBSTRING(description, 1, 98) AS extrait, logo FROM acteur ');
+                    
                     //Récupération des infos de la table acteur
-                        while($donnees = $reponse->fetch())
+                        while($donnees = $req->fetch())
                             {
                     ?>  
                     <!-- Block de présentation individuelle des partenaires à partir des infos récupérées  -->        
@@ -52,13 +54,13 @@
 						<div class="part-text">
                             <h3><?php echo $donnees['acteur']; ?></h3>
                             <p><?php echo $donnees['extrait']; ?> ...</p> 
-                            <!-- Bouton qui ouvre sur la page partenaire correspondante-->
-							<a class="button" href="#" target="_blank">Lire la suite</a>
+                            <!-- Bouton qui ouvre sur la page partenaire correspondant au numéro de l'id récupéré-->
+							<a class="button" href="partenaires.php?id_acteur=<?php echo intval($donnees['id_acteur']); ?>" target="_blank">Lire la suite</a>
                         </div>
                     </div>
                     <?php
                             }
-                            $reponse->closeCursor();
+                            $req->closeCursor();
                     ?>
                 </div>
             </section>
