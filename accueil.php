@@ -38,11 +38,13 @@
                         {
                             die('Erreur : ' .$e->getMessage());
                         }
+                    
                     $req = $bdd->query('SELECT id_acteur, acteur, SUBSTRING(description, 1, 98) AS extrait, logo FROM acteur ');
                     
                     //Récupération des infos de la table acteur
                         while($donnees = $req->fetch())
                             {
+
                     ?>  
                     <!-- Block de présentation individuelle des partenaires à partir des infos récupérées  -->        
                     <div class="part-content mt-20">
@@ -55,7 +57,7 @@
                             <h3><?php echo $donnees['acteur']; ?></h3>
                             <p><?php echo $donnees['extrait']; ?> ...</p> 
                             <!-- Bouton qui ouvre sur la page partenaire correspondant au numéro de l'id récupéré-->
-							<a class="button" href="partenaires.php?id_acteur=<?php echo intval($donnees['id_acteur']); ?>" target="_blank">Lire la suite</a>
+							<a class="button" href="partenaires.php?id_acteur=<?php echo intval($donnees['id_acteur']); ?>&acteur=<?php echo ($donnees['acteur']); ?>" target="_blank">Lire la suite</a>
                         </div>
                     </div>
                     <?php
