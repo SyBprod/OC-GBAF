@@ -223,6 +223,19 @@ form a:hover{
 .card-double form > div.input-center{
   width:100%
 }
+/*---------------FORMULAIRE DE COMMENTAIRES------------------*/
+form#commenter{
+  margin-top: 20px;
+}
+form#commenter textarea{
+  width:100%;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  height:100px;
+  max-height: 100px !important;
+  min-height: 100px !important;
+  padding: 10px;
+}
 /*---------------STRUCTURE---------------*/
 /*---------------------------------------*/
 /*-------------------Body----------------*/
