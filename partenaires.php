@@ -1,11 +1,14 @@
-
+<?php
+   //session_start();
+   
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?php echo $resultat['acteur']; ?></title><!-- Récupère le titre ACTEUR dans la table ACTEUR-->
+        <title><?php if(isset($_GET['acteur'])) echo $_GET['acteur']; //var_dump($_GET); ?></title><!-- Récupère le titre ACTEUR dans la table ACTEUR-->
         <link rel="stylesheet" href="style.css" type="text/css" media="screen">
         <script src="https://kit.fontawesome.com/03f0bb407b.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,15 +21,14 @@
             //Connexion à la bdd
             try{
                 $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '', 
-                                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                        array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
                 }
             catch(Exception $e){
                 die('Erreur : ' .$e->getMessage());
             }
-            if(isset($_GET['id_acteur']))//On teste pour savoir si la variable id_acteur existe
+            if(isset($_GET['id_acteur']))//On teste pour savoir si la variable id_acteur existe en $_GET et on l'a récupère en $_SESSION pour s'en resservir
             {
                 $_SESSION['id_acteur'] = $_GET['id_acteur'];
-                var_dump($_SESSION);
             }
             //Récupération des infos de la table acteur avec une requète préparée sur la base de l'id_acteur
             $req = $bdd->prepare('SELECT acteur, description, logo FROM acteur WHERE id_acteur = :id_acteur');
@@ -34,6 +36,7 @@
                 'id_acteur' => $_SESSION['id_acteur']
             ));
             $resultat = $req->fetch();
+            
         ?>  
             <section class="wrapper">
                 <div class="mt-20 mb-20"> 
@@ -44,60 +47,79 @@
                     <h1 class="pt-20 pb-20"><?php echo $resultat['acteur']; ?></h1>
                     <!--Récupère le texte DESCRIPTION dans la table ACTEUR-->
                     <p class="pt-20"><?php echo $resultat['description']?></p>
-        <?php //On ferme la requète pour pouvoir en ouvrir une autre après  
-            $req->closeCursor();
+        <?php 
+            $req->closeCursor();//On ferme la requète pour pouvoir en ouvrir une autre après  
         ?>
                 <div class="liste-part">
                     <div class="part-content-social">
                         <div class="social">
                             <div class="nb-comment">
-                                <p><span>0</span> Commentaire(s)</p>
+                                <p>
+                                    <span>
+                                    
+                                    <?php // Comptage des commentaires
+                                        $req = $bdd->prepare('SELECT COUNT(id_post) AS nbPost FROM post WHERE id_acteur = :id_acteur');
+                                        $req->execute(array(
+                                            'id_acteur' => $_SESSION['id_acteur']
+                                        ));
+                                        $donnees = $req->fetch();
+                                        echo $donnees['nbPost'];
+                                    ?>
+                                    </span> Commentaire(s)
+                                </p>
                             </div>
                             <div class="bt-comment">
                                 <a class="button" href="#commenter" alt="commenter"><i class="far fa-comment-alt"></i>Commenter</a>
                             </div>
                             <!--Script de prise en compte des votes-->
                             <?php
-                            //if(isset($_GET['positif]') AND )
-                               //                             $_GET['positif'] $_GET['negatif']
+
                             ?>
                             <div class="likes">
-                                <span>11</span><a href="partenaires.php?vote=positif"><i class="fas fa-thumbs-up"></i></a>
-                                <span>10</span><a href="partenaires.php?vote=negatif"><i class="fas fa-thumbs-down"></i></a>
+                                <span>0</span><a href="vote_post.php?t=1&id=<?= $id_acteur ?>"><i class="fas fa-thumbs-up"></i></a>
+                                <span>0</span><a href="vote_post.php?t=0&id=<?= $id_acteur ?>"><i class="fas fa-thumbs-down"></i></a>
                             </div>
                         </div>
                     </div>
-        <?php //Récupération des infos dans la table post pour afficher les posts relatifs à l'id_acteur
-            //$id_acteur = $_GET['id_acteur'];
-            if(isset($_SESSION['id_acteur']))
-            {
-            $req = $bdd->prepare('SELECT id_user, date_add, post FROM post WHERE id_acteur = :id_acteur');//pour le prenom voir si je peux faire appel aux SESSIONS
-            $req->execute(array(
-                'id_acteur' => $_SESSION['id_acteur']
-            ));
-            
-            while($reponse = $req->fetch())
-            {
-        ?>
+                    <?php 
+                        //Récupération des infos dans la table post pour afficher les posts relatifs à l'id_acteur
+                        if(isset($_SESSION['id_acteur']))
+                        {
+                            $id_acteur = $_SESSION['id_acteur'];
+                            $req = $bdd->prepare('SELECT account.id_user,  account.prenom AS prenom, post.date_add AS date_add, post.post AS commentaire, post.id_acteur AS ia FROM  post INNER JOIN account ON post.id_user = account.id_user');
+                            $req->execute();
+                            //Boucle d'affichage des commentaires en fonction
+                            while($reponse = $req->fetch())
+                            //echo $reponse['ia'];
+                            //print_r($reponse);
+                            if($id_acteur === $reponse['ia'] )//AND $req ->rowCount() == 1 (?? nombres de post par user)
+                            {
+                    ?>
                     <div class="part-content">
                         <div class="part-text">
-                            <p><strong>De : </strong><?php echo $reponse['id_user']; ?></p>
+                            <p><strong>De : </strong><?php echo $reponse['prenom']; ?></p>
                             <p><strong>Le : </strong><?php echo $reponse['date_add']; ?></p> 
-                            <p><strong>Commentaire : </strong><br /><?php echo nl2br(htmlspecialchars($reponse['post'])); ?></p>
+                            <p><strong>Commentaire : </strong><br /><?php echo nl2br(htmlspecialchars($reponse['commentaire'])); ?></p>
                         </div>
                     </div>
-        <?php   }
-            }
-       // Fin de la boucle des commentaires
-            $req->closeCursor();
-        ?>
-                    <form id="commenter" action="post_post.php" method="POST"><!--Formulaire pour poster des commentaires INSERT INTO post-->
+                    <?php            
+                            }
+                            else{
+                                //echo "Une erreur s'est produite.";
+                                //var_dump($reponse);
+                            }
+                        }
+                    // Fin de la boucle d'affichage des commentaires
+                        $req->closeCursor();
+                    ?>
+                    <!--Formulaire pour poster des commentaires -->
+                    <form id="commenter" action="post_post.php" method="POST">
                         <label for="prenom">Votre prénom :</label><br />
                         <input type="text" id="prenom" name="prenom" value="<?php if(isset($_SESSION['prenom'])) echo $_SESSION['prenom'];?>">
                         <label for="post">Votre message :</label><br />
-                        <textarea  id="post" name="post" style="width:100%; height:100px;" value="<?php if(isset($_POST['post'])) echo htmlspecialchars($_POST['post']); ?>"> 
+                        <textarea id="post" name="post" autofocus value="<?php if(isset($_POST['post'])) echo htmlspecialchars($_POST['post']); ?>"> 
                         </textarea>
-                        <input type="submit" value="Envoyer">
+                        <input class="submit-button" type="submit" value="Envoyer">
                     </form>
                 </div>
                 <div class="bt-comment">

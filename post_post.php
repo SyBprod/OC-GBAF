@@ -1,5 +1,7 @@
 
 <?php //Connexion bdd
+
+    session_start();
     try{
         $bdd = new PDO('mysql:host=localhost;dbname=oc_gbaf;charset=utf8', 'root', '', 
         array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
