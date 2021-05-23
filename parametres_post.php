@@ -1,7 +1,7 @@
 <?php
      //Démarrage d'une session pour récupérer le $_SESSION['id_user']
      session_start();
-     //Mise à jour des données dans la table ACCOUNTven fonction de la saisie du visiteur dans leformulaire de la page paramètres.php  puis redirige vers index.php
+     //Mise à jour des données dans la table ACCOUNT en fonction de la saisie du visiteur dans leformulaire de la page paramètres.php  puis redirige vers index.php
 
      //Connexion à la base de données
      try{

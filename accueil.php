@@ -44,8 +44,7 @@
                     //Récupération des infos de la table acteur
                         while($donnees = $req->fetch())
                             {
-
-                    ?>  
+                ?>  
                     <!-- Block de présentation individuelle des partenaires à partir des infos récupérées  -->        
                     <div class="part-content mt-20">
                         <!-- Logo -->
@@ -61,8 +60,8 @@
                         </div>
                     </div>
                     <?php
-                            }
-                            $req->closeCursor();
+                        }
+                    $req->closeCursor();
                     ?>
                 </div>
             </section>

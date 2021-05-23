@@ -23,20 +23,17 @@
 			'reponse' => $reponse));
 		$resultat = $req->fetch();
 		
-		if ((!$resultat) OR $_POST['question'] !== $resultat['question']) //OR $_POST['reponse'] !== $resultat['reponse']On teste si les résultats concordent
+		if ((!$resultat) OR $_POST['question'] !== $resultat['question']) //On teste si les résultats concordent
 		{
             session_start(); //Si mauvais identifiants ouverture d'une session avec insertion d'un message d'erreur sur la page index.php
             $_SESSION['erreur'] = $erreur;
-            //var_dump($_SESSION);
              header('Location: mot-de-passe-oublie.php');
-            //exit;
         }
             else
 		        {
                     session_start(); // Si les identifiants correspondent à ceux de la bdd on charge les variables que l'on va afficher dans le header
                     $_SESSION['id_user'] = $resultat['id_user'];
                     $_SESSION['pass'] = $resultat['pass'];
-                    //var_dump($_SESSION);
                     header('Location: mot-de-passe-oublie.php');
                     exit;
 		        }

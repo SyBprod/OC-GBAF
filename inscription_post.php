@@ -23,11 +23,6 @@ try{
 	}else{
 		$info = "Tous les champs sont obligatoires.";
 	}
-
-	//Hachage du mot de passe
-	
-    //$pass_hashe = password_hash($_POST['pass'], PASSWORD_DEFAULT); 
-
 	 //Insertion dans la table account
 	 $req = $bdd->prepare('INSERT INTO account(nom, prenom, username, pass, question, reponse) VALUES(:nom, :prenom, :username, :pass, :question, :reponse)');
      $req->execute(array(

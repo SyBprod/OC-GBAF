@@ -8,7 +8,7 @@
         {
             die('Erreur : ' .$e->getMessage());
         }
-    //Vérification de la validité des informations
+    //Vérification de la validité des informations de connexion
     
     if (!empty($_POST['username']) AND !empty($_POST['pass']))
 	{

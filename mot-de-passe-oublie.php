@@ -46,7 +46,6 @@
 		        </form>
             </section>
             <section class="no-password">
-               <!--  <p id="echo-erreur" class="pb-20">La réponse est éronnée, veuillez recommencer</p><br /> -->
                 <!-- AFfichage d'un message d'erreur en cas d'identifiants erronés -->
                 <p id="echo-erreur" class="pb-20"><?php if(isset($_SESSION['erreur'])) echo $_SESSION['erreur']; unset($_SESSION['erreur']); ?></p><!-- echo $erreur;  -->
                 <p class="pb-20">Votre mot de passe est :</p><br />
