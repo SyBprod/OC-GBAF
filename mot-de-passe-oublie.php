@@ -47,9 +47,10 @@
             </section>
             <section class="no-password">
                 <!-- AFfichage d'un message d'erreur en cas d'identifiants erronés -->
-                <p id="echo-erreur" class="pb-20"><?php if(isset($_SESSION['erreur'])) echo $_SESSION['erreur']; unset($_SESSION['erreur']); ?></p><!-- echo $erreur;  -->
+                <p id="echo-erreur" class="pb-20"><?php if(isset($_SESSION['erreur'])) echo $_SESSION['erreur']; unset($_SESSION['erreur']); ?></p>
+                <p id="echo-info" class="pb-20"><?php if(isset($_GET['info'])) echo $_GET['info']; ?></p>
                 <p class="pb-20">Votre mot de passe est :</p><br />
-                <p id="echo-info" class="pb-20"><?php if(isset($_SESSION['pass'])) echo htmlspecialchars($_SESSION['pass']); unset($_SESSION['pass']); ?></p><!--  echo $info;  -->
+                <p id="echo-info" class="pb-20"><?php if(isset($_SESSION['pass'])) echo htmlspecialchars($_SESSION['pass']); unset($_SESSION['pass']); ?></p>
                 <!-- Bouton de retour à la page de connexion -->
                 <a class="button" href="index.php">Retour page connexion</a>
             </section>

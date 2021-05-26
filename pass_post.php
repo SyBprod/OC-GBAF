@@ -16,7 +16,7 @@
         $question = $_POST['question'];
         $reponse = $_POST['reponse'];
         $erreur = "Réponse érronée";
-        
+        $info = "Merci de remplir tous les champs.";
         
         $req = $bdd->prepare('SELECT id_user, username, question, pass FROM account WHERE reponse = :reponse');
 		$req->execute(array(
@@ -37,6 +37,10 @@
                     header('Location: mot-de-passe-oublie.php');
                     exit;
 		        }
+                
 		$req->closeCursor();
-	} 
+	} else{
+
+        header('Location: mot-de-passe-oublie.php?info=Merci de remplir tous les champs.');
+    }
 ?>
