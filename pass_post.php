@@ -28,6 +28,7 @@
             session_start(); //Si mauvais identifiants ouverture d'une session avec insertion d'un message d'erreur sur la page index.php
             $_SESSION['erreur'] = $erreur;
              header('Location: mot-de-passe-oublie.php');
+             die;
         }
             else
 		        {
@@ -35,12 +36,12 @@
                     $_SESSION['id_user'] = $resultat['id_user'];
                     $_SESSION['pass'] = $resultat['pass'];
                     header('Location: mot-de-passe-oublie.php');
-                    exit;
+                    die;
 		        }
                 
 		$req->closeCursor();
 	} else{
 
         header('Location: mot-de-passe-oublie.php?info=Merci de remplir tous les champs.');
+        die;
     }
-?>

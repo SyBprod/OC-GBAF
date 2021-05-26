@@ -24,6 +24,6 @@
         ));
    
     header('Location: partenaires.php');
+    
  $req->closeCursor();
- ?>
 

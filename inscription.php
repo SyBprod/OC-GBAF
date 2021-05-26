@@ -49,9 +49,9 @@
                     </div>
                     <div class="input-center"> 
                         <label for="reponse">Réponse à la question secrète</label>
-                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" value="<?php if(isset($_POST['reponse'])) echo htmlspecialchars($_POST['reponse']);  ?>" />
+                        <input type="text" placeholder="Votre réponse" id="reponse" name="reponse" required value="<?php if(isset($_POST['reponse'])) echo htmlspecialchars($_POST['reponse']); ?>" />
                     </div>
-                    <!-- Bouton de validation qui va rediriger le visiteur vers la page de connexion -->
+                   <!-- Bouton de validation qui va rediriger le visiteur vers la page de connexion -->
                     <input class="submit-button" type="submit" role="button" value="Valider">             
                 </form>       
             </section>

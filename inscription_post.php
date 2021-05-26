@@ -10,7 +10,8 @@ try{
 		die('Erreur : ' .$e->getMessage());
 	}
 //Vérification de la validité des informations
-	$info = NULL;
+	
+	
 	
 	if (!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['username']) AND !empty($_POST['pass']) AND !empty($_POST['question']) AND !empty($_POST['response'])){
 		$nom = htmlspecialchars(addslashes($nom));
@@ -19,9 +20,10 @@ try{
 		$pass = htmlspecialchars(addslashes($pass));
 		$question = $question;
 		$reponse = htmlspecialchars(addslashes($reponse));
+		
 		unset($_POST, $nom, $prenom, $username, $pass, $question, $reponse);
 	}else{
-		$info = "Tous les champs sont obligatoires.";
+		
 	}
 	 //Insertion dans la table account
 	 $req = $bdd->prepare('INSERT INTO account(nom, prenom, username, pass, question, reponse) VALUES(:nom, :prenom, :username, :pass, :question, :reponse)');
@@ -34,5 +36,5 @@ try{
          'reponse' => $_POST['reponse']));
 	
 //Puis redirection vers index.php pour la connexion
-header('Location: index.php');
- ?>
+header('Location: index.php?info=Vous êtes bien inscrit. Veuillez vous identifier.');
+die; 

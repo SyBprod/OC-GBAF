@@ -28,11 +28,11 @@ p, a, label, ul, li{
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
-p#echo-erreur {
+p.echo-erreur {
   color:#ff0000;
   font-weight: bold;
 }
-p#echo-info {
+p.echo-info {
   color:rgb(56, 168, 84);
   font-weight: bold;
 }
@@ -187,7 +187,7 @@ form a:hover{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 60px;
+  padding: 20px 40px;
 }
 .no-password{
   display: flex;
@@ -505,6 +505,7 @@ footer a{
   .no-count,.no-password{
     align-self: center;
     margin: 10px 0 30px 0;
+    text-align: center;
   }
 }
 /* -------------------Breakpoint 600px----------------------------- */

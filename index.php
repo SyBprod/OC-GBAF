@@ -39,6 +39,7 @@
             <!-- Bouton qui dirige vers la page inscription si le visiteur n'a pas encore de compte -->
             <section class="no-count">
                 <div class="mt-20 mb-30">
+                    <p class="echo-info pb-20"><?php if(isset($_GET['info'])) echo $_GET['info']; unset($_GET['info']); ?></p>
                     <p class="pb-20">Je n'ai pas de compte</p>
                     <a class="button" href="inscription.php">Inscription</a>
                 </div>

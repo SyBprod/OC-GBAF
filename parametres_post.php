@@ -40,8 +40,8 @@
                ));
                
           //Redirection vers index.php pour une nouvelle identification
-          header('Location: index.php');
-          exit;
+          //Puis redirection vers index.php pour la connexion
+          header('Location: index.php?info=Vos paramètres ont bien été modifiés.<br /> Veuillez vous identifier.');
+          die; 
       
      $req->closeCursor();
-?>

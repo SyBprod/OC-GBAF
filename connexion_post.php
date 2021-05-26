@@ -38,4 +38,3 @@
 		        }
 		$req->closeCursor();
 	} 
-?>
