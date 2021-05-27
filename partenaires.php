@@ -80,15 +80,25 @@
                                     $req->closeCursor();     
                                     }
                             ?>
-                            <?php // Comptage des votes
-                                $req = $bdd->prepare('SELECT COUNT(vote) AS nbVote FROM vote WHERE id_acteur = :id_acteur');
+                            <?php // Comptage des votes positifs
+                                $req = $bdd->prepare('SELECT COUNT(vote) AS nbVotesPositifs FROM vote WHERE id_acteur = :id_acteur AND vote = 1');
                                 $req->execute(array(
-                                    'id_acteur' => $_SESSION['id_acteur']
+                                    'id_acteur' => $_SESSION['id_acteur'],
                                 ));
                                 $donnees = $req->fetch();
                                 ?>  
-                                <span><?php echo $donnees['nbVote']; ?></span><a href="partenaires.php?vote=1"><i class="fas fa-thumbs-up"></i></a>
-                                <span><?php echo $donnees['nbVote']; ?></span><a type="button" href="partenaires.php?vote=0"><i class="fas fa-thumbs-down"></i></a>
+                                <span><?php echo $donnees['nbVotesPositifs']; ?></span><a href="partenaires.php?vote=1"><i class="fas fa-thumbs-up"></i></a>
+                            <?php
+                                $req->closeCursor();    
+                            ?>
+                             <?php // Comptage des votes négatifs
+                                $req = $bdd->prepare('SELECT COUNT(vote) AS nbVotesNegatifs FROM vote WHERE id_acteur = :id_acteur AND vote = 0');
+                                $req->execute(array(
+                                    'id_acteur' => $_SESSION['id_acteur'],
+                                ));
+                                $donnees = $req->fetch();
+                                ?>  
+                                <span><?php echo $donnees['nbVotesNegatifs']; ?></span><a type="button" href="partenaires.php?vote=0"><i class="fas fa-thumbs-down"></i></a>
                             <?php
                                 $req->closeCursor();    
                             ?>
